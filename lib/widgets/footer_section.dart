@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class YammiFooterSection extends StatelessWidget {
   const YammiFooterSection({super.key});
@@ -26,9 +27,9 @@ class YammiFooterSection extends StatelessWidget {
                       children: [
                         CircleAvatar(),
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           "We make you feel good\nand tasty every day",
-                          style: TextStyle(fontSize: 16),
+                          style: GoogleFonts.lato(),
                         ),
                         const SizedBox(height: 20),
                         Row(
@@ -49,16 +50,13 @@ class YammiFooterSection extends StatelessWidget {
                       padding: const EdgeInsets.all(32.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "CLIENTS",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        children: [
+                          Text("CLIENTS", style: GoogleFonts.lato()),
                           SizedBox(height: 10),
-                          Text("Our Services"),
-                          Text("Products"),
-                          Text("Menu"),
-                          Text("Industries"),
+                          Text("Our Services", style: GoogleFonts.lato()),
+                          Text("Products", style: GoogleFonts.lato()),
+                          Text("Menu", style: GoogleFonts.lato()),
+                          Text("Industries", style: GoogleFonts.lato()),
                         ],
                       ),
                     ),
@@ -69,16 +67,13 @@ class YammiFooterSection extends StatelessWidget {
                       padding: const EdgeInsets.all(32.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "COMPANY",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        children: [
+                          Text("COMPANY", style: GoogleFonts.lato()),
                           SizedBox(height: 10),
-                          Text("About Us"),
-                          Text("Our Story"),
-                          Text("Mission"),
-                          Text("Leadership"),
+                          Text("About Us", style: GoogleFonts.lato()),
+                          Text("Our Story", style: GoogleFonts.lato()),
+                          Text("Mission", style: GoogleFonts.lato()),
+                          Text("Leadership", style: GoogleFonts.lato()),
                         ],
                       ),
                     ),
@@ -91,13 +86,16 @@ class YammiFooterSection extends StatelessWidget {
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text("© 2024 Yammi Yammi, Inc. All rights reserved."),
+                children: [
+                  Text(
+                    "© 2024 Yammi Yammi, Inc. All rights reserved.",
+                    style: GoogleFonts.lato(),
+                  ),
                   Row(
                     children: [
-                      Text("Privacy Policy"),
+                      Text("Privacy Policy", style: GoogleFonts.lato()),
                       SizedBox(width: 20),
-                      Text("License"),
+                      Text("License", style: GoogleFonts.lato()),
                     ],
                   ),
                 ],

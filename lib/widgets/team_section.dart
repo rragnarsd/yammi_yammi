@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yammi_yammi/yammi_menu.dart';
+import 'package:yammi_yammi/utils/app_styles.dart';
+import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
 class YammiTeamSection extends StatelessWidget {
   const YammiTeamSection({super.key});
@@ -11,6 +12,14 @@ class YammiTeamSection extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
           color: Color(0xffFF72B4),
+          boxShadow: [
+            const BoxShadow(
+              color: Colors.black,
+              offset: Offset(2, 2),
+              blurRadius: 0,
+              spreadRadius: 0,
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.all(32.0),
@@ -27,34 +36,26 @@ class YammiTeamSection extends StatelessWidget {
                   childAspectRatio: 1,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.blue,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                       child: const Center(child: Text('Grid Item 1')),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.blue,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                       child: const Center(child: Text('Grid Item 2')),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.blue,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                       child: const Center(child: Text('Grid Item 3')),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.blue,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                       child: const Center(child: Text('Grid Item 4')),
                     ),
@@ -65,10 +66,8 @@ class YammiTeamSection extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
                   height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black, width: 2),
-                    color: Color(0xffCAFE89),
+                  decoration: raisedBorderDecoration(
+                    backgroundColor: Colors.blue,
                   ),
                   child: const Center(child: Text('Grid Item 1')),
                 ),

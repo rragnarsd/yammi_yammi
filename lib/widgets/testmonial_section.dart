@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiTestimonialSection extends StatelessWidget {
   const YammiTestimonialSection({super.key});
@@ -8,9 +9,9 @@ class YammiTestimonialSection extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 2),
-          color: Colors.white,
+        decoration: raisedBorderDecoration(
+          backgroundColor: Colors.white,
+          borderRadius: 0,
         ),
         child: Padding(
           padding: const EdgeInsets.all(32.0),
@@ -31,24 +32,18 @@ class YammiTestimonialSection extends StatelessWidget {
                   childAspectRatio: 1.2,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.white,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.white,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black, width: 2),
-                        color: Colors.white,
+                      decoration: raisedBorderDecoration(
+                        backgroundColor: Colors.blue,
                       ),
                     ),
                   ],

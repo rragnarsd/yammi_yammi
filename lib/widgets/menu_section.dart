@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiMenuSection extends StatelessWidget {
   const YammiMenuSection({super.key});
@@ -16,35 +17,19 @@ class YammiMenuSection extends StatelessWidget {
         childAspectRatio: 2,
         children: [
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.black, width: 2),
-              color: Colors.blue,
-            ),
+            decoration: raisedBorderDecoration(backgroundColor: Colors.blue),
             child: const Center(child: Text('Grid Item 1')),
           ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.black, width: 2),
-              color: Colors.blue,
-            ),
+            decoration: raisedBorderDecoration(backgroundColor: Colors.blue),
             child: const Center(child: Text('Grid Item 2')),
           ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.black, width: 2),
-              color: Colors.blue,
-            ),
+            decoration: raisedBorderDecoration(backgroundColor: Colors.blue),
             child: const Center(child: Text('Grid Item 3')),
           ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.black, width: 2),
-              color: Colors.blue,
-            ),
+            decoration: raisedBorderDecoration(backgroundColor: Colors.blue),
             child: const Center(child: Text('Grid Item 4')),
           ),
         ],

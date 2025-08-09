@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:yammi_yammi/footer_section.dart';
-import 'package:yammi_yammi/hero_section.dart';
-import 'package:yammi_yammi/menu_section.dart';
-import 'package:yammi_yammi/nav_section.dart';
-import 'package:yammi_yammi/team_section.dart';
-import 'package:yammi_yammi/testmonial_section.dart';
-import 'package:yammi_yammi/yammi_menu.dart';
+import 'package:yammi_yammi/widgets/footer_section.dart';
+import 'package:yammi_yammi/widgets/hero_section.dart';
+import 'package:yammi_yammi/widgets/menu_section.dart';
+import 'package:yammi_yammi/widgets/nav_section.dart';
+import 'package:yammi_yammi/widgets/team_section.dart';
+import 'package:yammi_yammi/widgets/testmonial_section.dart';
+import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});

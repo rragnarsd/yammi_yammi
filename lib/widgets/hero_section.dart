@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiHeroSection extends StatelessWidget {
   const YammiHeroSection({super.key});
@@ -18,12 +19,10 @@ class YammiHeroSection extends StatelessWidget {
                   flex: 3,
                   child: Container(
                     width: MediaQuery.sizeOf(context).width / 2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.black, width: 2),
-                      color: Color(0xffFF72B4),
+                    decoration: raisedBorderDecoration(
+                      backgroundColor: Color(0xffFF72B4),
                     ),
-                    child: const Text('Menu Item 1'),
+                    child: Center(child: const Text('Menu Item 1')),
                   ),
                 ),
                 SizedBox(height: 8),
@@ -36,24 +35,20 @@ class YammiHeroSection extends StatelessWidget {
                         Expanded(
                           child: Container(
                             height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.black, width: 2),
-                              color: Color(0xffFFD074),
+                            decoration: raisedBorderDecoration(
+                              backgroundColor: Color(0xffFFD074),
                             ),
-                            child: const Text('Menu Item 2'),
+                            child: Center(child: const Text('Menu Item 2')),
                           ),
                         ),
                         SizedBox(width: 8),
                         Expanded(
                           child: Container(
                             height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.black, width: 2),
-                              color: Color(0xff96C4E3),
+                            decoration: raisedBorderDecoration(
+                              backgroundColor: Color(0xff96C4E3),
                             ),
-                            child: const Text('Menu Item 3'),
+                            child: Center(child: const Text('Menu Item 3')),
                           ),
                         ),
                       ],
@@ -67,12 +62,10 @@ class YammiHeroSection extends StatelessWidget {
           Expanded(
             child: Container(
               height: 400,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.black, width: 2),
-                color: Color(0xffCAFE89),
+              decoration: raisedBorderDecoration(
+                backgroundColor: Color(0xffCAFE89),
               ),
-              child: const Text('Banner'),
+              child: Center(child: const Text('Banner')),
             ),
           ),
         ],
