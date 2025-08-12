@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
@@ -7,69 +8,58 @@ class YammiTeamSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final breakpoints = ResponsiveBreakpoints.of(context);
+
+    final crossAxisCount = breakpoints.between(MOBILE, TABLET)
+        ? 2
+        : breakpoints.smallerThan(MOBILE)
+        ? 1
+        : 4;
+
     return SliverToBoxAdapter(
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 2),
-          color: Color(0xffFF72B4),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black,
-              offset: Offset(2, 2),
-              blurRadius: 0,
-              spreadRadius: 0,
-            ),
-          ],
+        decoration: raisedBorderDecoration(
+          backgroundColor: const Color(0xffFF72B4),
+          borderRadius: 0,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
+              ? const EdgeInsets.all(4)
+              : const EdgeInsets.all(32.0),
           child: Column(
             children: [
               YammiMenu(title: 'Our Team', btnText: 'About Us'),
               Container(
                 padding: const EdgeInsets.all(16.0),
-                child: GridView.count(
+                child: GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 16.0,
-                  childAspectRatio: 1,
-                  children: [
-                    Container(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Container(
                       decoration: raisedBorderDecoration(
                         backgroundColor: Colors.blue,
                       ),
-                      child: const Center(child: Text('Grid Item 1')),
-                    ),
-                    Container(
-                      decoration: raisedBorderDecoration(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: const Center(child: Text('Grid Item 2')),
-                    ),
-                    Container(
-                      decoration: raisedBorderDecoration(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: const Center(child: Text('Grid Item 3')),
-                    ),
-                    Container(
-                      decoration: raisedBorderDecoration(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: const Center(child: Text('Grid Item 4')),
-                    ),
-                  ],
+                      child: Center(child: Text('Grid Item ${index + 1}')),
+                    );
+                  },
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(16.0),
                 child: Container(
                   height: 200,
+                  width: double.infinity,
                   decoration: raisedBorderDecoration(
                     backgroundColor: Colors.blue,
                   ),
-                  child: const Center(child: Text('Grid Item 1')),
+                  child: const Center(child: Text('X Item')),
                 ),
               ),
             ],
