@@ -1,113 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class YammiFooterSection extends StatelessWidget {
   const YammiFooterSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isTabletOrSmaller = ResponsiveBreakpoints.of(
+      context,
+    ).between(MOBILE, TABLET);
+
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
-          color: Color(0xff66FFC9),
+          color: const Color(0xff66FFC9),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(),
-                        const SizedBox(height: 16),
-                        Text(
-                          "We make you feel good\nand tasty every day",
-                          style: GoogleFonts.lato(),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            _circleIcon(Icons.discord),
-                            const SizedBox(width: 10),
-                            _circleIcon(Icons.alternate_email),
-                            const SizedBox(width: 10),
-                            _circleIcon(Icons.play_circle),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("CLIENTS", style: GoogleFonts.lato()),
-                          SizedBox(height: 10),
-                          Text("Our Services", style: GoogleFonts.lato()),
-                          Text("Products", style: GoogleFonts.lato()),
-                          Text("Menu", style: GoogleFonts.lato()),
-                          Text("Industries", style: GoogleFonts.lato()),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("COMPANY", style: GoogleFonts.lato()),
-                          SizedBox(height: 10),
-                          Text("About Us", style: GoogleFonts.lato()),
-                          Text("Our Story", style: GoogleFonts.lato()),
-                          Text("Mission", style: GoogleFonts.lato()),
-                          Text("Leadership", style: GoogleFonts.lato()),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const Divider(thickness: 1, color: Colors.black),
-              const SizedBox(height: 16),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "© 2024 Yammi Yammi, Inc. All rights reserved.",
-                    style: GoogleFonts.lato(),
-                  ),
-                  Row(
-                    children: [
-                      Text("Privacy Policy", style: GoogleFonts.lato()),
-                      SizedBox(width: 20),
-                      Text("License", style: GoogleFonts.lato()),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
+          padding: isTabletOrSmaller
+              ? ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
+                    ? const EdgeInsets.all(4.0)
+                    : const EdgeInsets.all(32.0)
+              : const EdgeInsets.all(32.0),
+          child: isTabletOrSmaller ? _FooterSmallScreen() : _FooterBigScreen(),
         ),
       ),
     );
   }
+}
 
-  static Widget _circleIcon(IconData icon) {
+class _FooterBigScreen extends StatelessWidget {
+  const _FooterBigScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        Row(
+          children: [Expanded(flex: 2, child: _BrandSection(centered: false))],
+        ),
+        SizedBox(height: 16),
+        Divider(thickness: 1, color: Colors.black),
+        SizedBox(height: 16),
+        _FooterLinks(centered: false),
+      ],
+    );
+  }
+}
+
+class _FooterSmallScreen extends StatelessWidget {
+  const _FooterSmallScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        _BrandSection(centered: true),
+        SizedBox(height: 16),
+        Divider(thickness: 1, color: Colors.black),
+        SizedBox(height: 16),
+        _FooterLinks(centered: true),
+      ],
+    );
+  }
+}
+
+class _BrandSection extends StatelessWidget {
+  const _BrandSection({required this.centered});
+
+  final bool centered;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: centered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        const CircleAvatar(),
+        const SizedBox(height: 16),
+        Text(
+          "We make you feel good\nand tasty every day",
+          style: GoogleFonts.lato(),
+          textAlign: centered ? TextAlign.center : TextAlign.start,
+        ),
+        const SizedBox(height: 20),
+        _IconRow(centered: centered),
+      ],
+    );
+  }
+}
+
+class _IconRow extends StatelessWidget {
+  const _IconRow({required this.centered});
+
+  final bool centered;
+
+  Widget _circleIcon(IconData icon) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -115,6 +108,62 @@ class YammiFooterSection extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: Icon(icon, size: 18, color: Colors.black),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: centered
+          ? MainAxisAlignment.center
+          : MainAxisAlignment.start,
+      children: [
+        _circleIcon(Icons.discord),
+        const SizedBox(width: 10),
+        _circleIcon(Icons.alternate_email),
+        const SizedBox(width: 10),
+        _circleIcon(Icons.play_circle),
+      ],
+    );
+  }
+}
+
+class _FooterLinks extends StatelessWidget {
+  const _FooterLinks({required this.centered});
+
+  final bool centered;
+
+  @override
+  Widget build(BuildContext context) {
+    final copyright = Text(
+      "© 2024 Yammi Yammi, Inc. All rights reserved.",
+      style: GoogleFonts.lato(),
+      textAlign: centered ? TextAlign.center : TextAlign.start,
+    );
+
+    final links = IntrinsicHeight(
+      child: Row(
+        mainAxisAlignment: centered
+            ? MainAxisAlignment.center
+            : MainAxisAlignment.start,
+        children: [
+          Text("Privacy Policy", style: GoogleFonts.lato()),
+          VerticalDivider(color: Colors.black, thickness: 0.5),
+          Text("License", style: GoogleFonts.lato()),
+        ],
+      ),
+    );
+
+    if (centered) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [copyright, const SizedBox(height: 8), links],
+      );
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [copyright, links],
     );
   }
 }
