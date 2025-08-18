@@ -80,6 +80,7 @@ class YammiHeroSection extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
                           children: [
+                            //TODO - Add white container around the text like on teams
                             RotatedBox(
                               quarterTurns: -1,
                               child: Text(
