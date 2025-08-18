@@ -27,10 +27,16 @@ class YammiMenu extends StatelessWidget {
 }
 
 class HoverButton extends StatefulWidget {
+  const HoverButton({
+    super.key,
+    required this.btnText,
+    this.onPressed,
+    this.hasIcon = false,
+  });
+
   final String btnText;
   final VoidCallback? onPressed;
-
-  const HoverButton({super.key, required this.btnText, this.onPressed});
+  final bool hasIcon;
 
   @override
   State<HoverButton> createState() => _HoverButtonState();
@@ -53,14 +59,39 @@ class _HoverButtonState extends State<HoverButton> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           decoration: raisedBorderDecoration(
             backgroundColor: _isHovered ? Colors.grey[100]! : Colors.white,
+            borderColor: Colors.black,
             shadowOffset: _isHovered ? const Offset(4, 4) : const Offset(2, 2),
           ),
-          child: Text(
-            widget.btnText,
-            style: GoogleFonts.lato(
-              fontWeight: _isHovered ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
+          child: widget.hasIcon
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.btnText,
+                      style: GoogleFonts.lato(
+                        color: Colors.black,
+                        fontWeight: _isHovered
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Transform.rotate(
+                      angle: 45 * 3.1415926535 / 180,
+
+                      child: const Icon(Icons.arrow_upward),
+                    ),
+                  ],
+                )
+              : Text(
+                  widget.btnText,
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontWeight: _isHovered
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
+                ),
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/local_data/testimonials.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiTestimonialSection extends StatelessWidget {
@@ -9,72 +11,135 @@ class YammiTestimonialSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTabletOrSmaller = ResponsiveBreakpoints.of(
       context,
-    ).between(MOBILE, TABLET);
+    ).smallerOrEqualTo(TABLET);
 
     return SliverToBoxAdapter(
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        decoration: raisedBorderDecoration(
-          backgroundColor: Colors.white,
-          borderRadius: 0,
-        ),
-        child: Padding(
-          padding: ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
-              ? const EdgeInsets.all(4.0)
-              : const EdgeInsets.all(32.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Customers love Yammi Yammi',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-              isTabletOrSmaller
-                  ? Column(
-                      children: [
-                        Container(
-                          height: 150,
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: raisedBorderDecoration(
-                            backgroundColor: Colors.blue,
-                          ),
+        color: Colors.white,
+        child: MaxWidthBox(
+          maxWidth: 1200,
+          child: Padding(
+            padding: isTabletOrSmaller
+                ? const EdgeInsets.all(8.0)
+                : const EdgeInsets.all(32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Customers love Yammi Yammi',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 32),
+                isTabletOrSmaller
+                    ? Column(
+                        children: testimonials
+                            .map(
+                              (testimonial) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: TestimonialCard(
+                                  data: testimonial,
+                                  isInRow: false,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : IntrinsicHeight(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: testimonials
+                              .map(
+                                (testimonial) => Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0,
+                                    ),
+                                    child: TestimonialCard(
+                                      data: testimonial,
+                                      isInRow: true,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
                         ),
-                        Container(
-                          height: 150,
-                          width: double.infinity,
-                          decoration: raisedBorderDecoration(
-                            backgroundColor: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 310,
-                            margin: const EdgeInsets.only(right: 8),
-                            decoration: raisedBorderDecoration(
-                              backgroundColor: Colors.blue,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 310,
-                            margin: const EdgeInsets.only(left: 8),
-                            decoration: raisedBorderDecoration(
-                              backgroundColor: Colors.blue,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-            ],
+                      ),
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TestimonialCard extends StatelessWidget {
+  const TestimonialCard({super.key, required this.data, required this.isInRow});
+
+  final Testimonial data;
+  final bool isInRow;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget reviewWidget = isInRow
+        ? Expanded(
+            child: Text(data.review, style: GoogleFonts.lato(fontSize: 14)),
+          )
+        : Text(data.review, style: GoogleFonts.lato(fontSize: 14));
+
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: raisedBorderDecoration(backgroundColor: Colors.white),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            data.title,
+            style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          reviewWidget,
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(data.avatarUrl),
+                radius: 20,
+                backgroundColor: const Color(0xffFFD074),
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data.name,
+                    style: GoogleFonts.lato(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    data.role,
+                    style: GoogleFonts.lato(color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: List.generate(
+              5,
+              (index) => Icon(
+                index < data.rating ? Icons.star : Icons.star_border,
+                color: Colors.amber,
+                size: 20,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

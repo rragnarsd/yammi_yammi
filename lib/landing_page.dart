@@ -69,38 +69,39 @@ class _LandingPageState extends State<LandingPage> {
       context,
     ).smallerOrEqualTo(TABLET);
 
-    return MaxWidthBox(
-      maxWidth: 1200,
-      child: Scaffold(
-        floatingActionButton: isTabletOrSmaller
-            ? null
-            : AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _showFab ? 1.0 : 0.0,
-                child: FloatingActionButton(
-                  onPressed: () => _scrollToTop(),
-                  backgroundColor: const Color(0xffFCD36B),
-                  child: const Icon(Icons.arrow_upward),
-                ),
+    return Scaffold(
+      floatingActionButton: isTabletOrSmaller
+          ? null
+          : AnimatedOpacity(
+              duration: Duration(milliseconds: 500),
+              opacity: _showFab ? 1.0 : 0.0,
+              child: FloatingActionButton(
+                onPressed: () => _scrollToTop(),
+                backgroundColor: const Color(0xffFCD36B),
+                child: const Icon(Icons.arrow_upward),
               ),
-        endDrawer: isTabletOrSmaller
-            ? YammiDrawerMenu(
-                onSectionSelected: (section) {
-                  Navigator.of(context).pop();
-                  scrollToSection(sectionKeys[section]!);
-                },
-              )
-            : null,
-        body: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverToBoxAdapter(
-              key: menuKey,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 3),
-                  color: const Color(0xff66FFC9),
-                ),
+            ),
+      endDrawer: isTabletOrSmaller
+          ? YammiDrawerMenu(
+              onSectionSelected: (section) {
+                Navigator.of(context).pop();
+                scrollToSection(sectionKeys[section]!);
+              },
+            )
+          : null,
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverToBoxAdapter(
+            key: menuKey,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 3),
+                color: const Color(0xff66FFC9),
+              ),
+              child: MaxWidthBox(
+                maxWidth: 1200,
                 child: Padding(
                   padding: isTabletOrSmaller
                       ? const EdgeInsets.all(4)
@@ -121,11 +122,11 @@ class _LandingPageState extends State<LandingPage> {
                 ),
               ),
             ),
-            YammiTeamSection(key: aboutUsKey),
-            YammiTestimonialSection(key: reviewsKey),
-            YammiFooterSection(),
-          ],
-        ),
+          ),
+          YammiTeamSection(key: aboutUsKey),
+          YammiTestimonialSection(key: reviewsKey),
+          YammiFooterSection(),
+        ],
       ),
     );
   }

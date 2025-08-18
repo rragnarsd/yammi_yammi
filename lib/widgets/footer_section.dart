@@ -13,18 +13,24 @@ class YammiFooterSection extends StatelessWidget {
 
     return SliverToBoxAdapter(
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 2),
           color: const Color(0xff66FFC9),
         ),
-        child: Padding(
-          padding: isTabletOrSmaller
-              ? ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
-                    ? const EdgeInsets.all(4.0)
-                    : const EdgeInsets.all(32.0)
-              : const EdgeInsets.all(32.0),
-          child: isTabletOrSmaller ? _FooterSmallScreen() : _FooterBigScreen(),
+        child: MaxWidthBox(
+          maxWidth: 1200,
+          child: Padding(
+            padding: isTabletOrSmaller
+                ? ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
+                      ? const EdgeInsets.all(4.0)
+                      : const EdgeInsets.all(32.0)
+                : const EdgeInsets.all(32.0),
+            child: isTabletOrSmaller
+                ? _FooterSmallScreen()
+                : _FooterBigScreen(),
+          ),
         ),
       ),
     );
