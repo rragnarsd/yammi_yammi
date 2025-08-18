@@ -29,22 +29,34 @@ class YammiHeroSection extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Row(
                   children: [
-                    Text(
-                      'We will feed you tasty and cheap food',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'We will feed you tasty and cheap food',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          HoverButton(
+                            btnText: 'Reserve a table',
+                            onPressed: () {},
+                            hasIcon: true,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 16),
-                    HoverButton(
-                      btnText: 'Reserve a table',
-                      onPressed: () {},
-                      hasIcon: true,
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/food3.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ],
                 ),
@@ -78,8 +90,9 @@ class YammiHeroSection extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 8),
-                            Placeholder(fallbackWidth: 100),
+                            Expanded(
+                              child: Image.asset('assets/images/coffeeman.png'),
+                            ),
                           ],
                         ),
                       ),
@@ -94,28 +107,44 @@ class YammiHeroSection extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Stack(
                           children: [
-                            Text(
-                              '100+',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '100+',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Reviews & Rating'.toUpperCase(),
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(height: 16),
+                                  HoverButton(
+                                    btnText: 'Leave feedback',
+                                    onPressed: () {},
+                                  ),
+                                ],
                               ),
                             ),
-                            Text(
-                              'Reviews & Rating'.toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            HoverButton(
-                              btnText: 'Leave feedback',
-                              onPressed: () {},
+                            Positioned(
+                              bottom: -160,
+                              left: 0,
+                              right: 0,
+                              child: Image.asset('assets/images/hand.png'),
                             ),
                           ],
                         ),

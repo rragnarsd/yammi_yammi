@@ -113,7 +113,7 @@ class YammiTeamSection extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    height: breakpoints.between(MOBILE, TABLET) ? 360 : 300,
+                    height: 280,
                     width: double.infinity,
                     decoration: raisedBorderDecoration(
                       backgroundColor: const Color(0xffCAFE89),
@@ -148,8 +148,6 @@ class YammiTeamSection extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 16),
-                                Flexible(child: Placeholder()),
                               ],
                             )
                           : Row(
@@ -180,7 +178,12 @@ class YammiTeamSection extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(width: 16),
-                                Flexible(child: Placeholder()),
+                                Flexible(
+                                  child: Image.asset(
+                                    'assets/images/food1.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ],
                             ),
                     ),
