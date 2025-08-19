@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/local_data/pageview_items.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
@@ -25,7 +27,7 @@ class YammiHeroSection extends StatelessWidget {
             child: Container(
               width: isColumnLayout ? double.infinity : fullWidth / 2,
               decoration: raisedBorderDecoration(
-                backgroundColor: const Color(0xffFF72B4),
+                backgroundColor: YammiColors.hotPinkColor,
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -74,13 +76,12 @@ class YammiHeroSection extends StatelessWidget {
                     child: Container(
                       height: 240,
                       decoration: raisedBorderDecoration(
-                        backgroundColor: const Color(0xffFFD074),
+                        backgroundColor: YammiColors.peachOrangeColor,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Row(
                           children: [
-                            //TODO - Add white container around the text like on teams
                             RotatedBox(
                               quarterTurns: -1,
                               child: Text(
@@ -104,7 +105,7 @@ class YammiHeroSection extends StatelessWidget {
                     child: Container(
                       height: 240,
                       decoration: raisedBorderDecoration(
-                        backgroundColor: const Color(0xff96C4E3),
+                        backgroundColor: YammiColors.skyBlueColor,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -161,12 +162,12 @@ class YammiHeroSection extends StatelessWidget {
     );
 
     final bannerSection = Container(
-      height: 480,
+      height: MediaQuery.sizeOf(context).width >= 801 ? 480 : 230,
       width: isColumnLayout ? double.infinity : null,
       decoration: raisedBorderDecoration(
-        backgroundColor: const Color(0xffCAFE89),
+        backgroundColor: YammiColors.limeYellowColor,
       ),
-      child: BannerCarousel(),
+      child: _BannerCarousel(),
     );
 
     return Padding(
@@ -191,14 +192,14 @@ class YammiHeroSection extends StatelessWidget {
   }
 }
 
-class BannerCarousel extends StatefulWidget {
-  const BannerCarousel({super.key});
+class _BannerCarousel extends StatefulWidget {
+  const _BannerCarousel();
 
   @override
-  State<BannerCarousel> createState() => _BannerCarouselState();
+  State<_BannerCarousel> createState() => _BannerCarouselState();
 }
 
-class _BannerCarouselState extends State<BannerCarousel> {
+class _BannerCarouselState extends State<_BannerCarousel> {
   late PageController _pageController;
   int currentPage = 0;
 
@@ -229,29 +230,58 @@ class _BannerCarouselState extends State<BannerCarousel> {
               controller: _pageController,
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              onPageChanged: (int page) {
-                setState(() => currentPage = page);
-              },
-              children: [
-                Container(
-                  color: Color(0xffCAFE89),
-                  child: Center(child: Text('PageOne')),
-                ),
-                Container(
-                  color: Color(0xffCAFE89),
-                  child: Center(child: Text('PageTwo')),
-                ),
-                Container(
-                  color: Color(0xffCAFE89),
-                  child: Center(child: Text('PageThree')),
-                ),
-              ],
+              onPageChanged: (int page) => setState(() => currentPage = page),
+              children: pageViewItems.map((item) {
+                return Container(
+                  color: YammiColors.limeYellowColor,
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MediaQuery.sizeOf(context).width >= 801
+                          ? Center(child: Image.asset(item.image, height: 162))
+                          : SizedBox.shrink(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: YammiColors.peachOrangeColor,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: YammiColors.blackColor,
+                            width: 1.4,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          child: Text(
+                            item.title,
+                            style: GoogleFonts.lato(
+                              color: YammiColors.blackColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        item.description,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              height: 100,
+              height: 40,
               child: SizedBox(
                 width: double.infinity,
                 child: Padding(
@@ -275,8 +305,8 @@ class _BannerCarouselState extends State<BannerCarousel> {
                               height: 6,
                               decoration: BoxDecoration(
                                 color: currentPage == index
-                                    ? Color(0xffFECF69)
-                                    : Colors.black87,
+                                    ? YammiColors.peachOrangeColor
+                                    : YammiColors.blackColor87,
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             ),

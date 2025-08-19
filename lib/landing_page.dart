@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/nav_section_types.dart';
 import 'package:yammi_yammi/widgets/footer_section.dart';
 import 'package:yammi_yammi/widgets/hero_section.dart';
@@ -7,6 +8,7 @@ import 'package:yammi_yammi/widgets/menu_section.dart';
 import 'package:yammi_yammi/widgets/nav_section.dart';
 import 'package:yammi_yammi/widgets/team_section.dart';
 import 'package:yammi_yammi/widgets/testmonial_section.dart';
+import 'package:yammi_yammi/widgets/yammi_drawer.dart';
 import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
 class LandingPage extends StatefulWidget {
@@ -77,7 +79,7 @@ class _LandingPageState extends State<LandingPage> {
               opacity: _showFab ? 1.0 : 0.0,
               child: FloatingActionButton(
                 onPressed: () => _scrollToTop(),
-                backgroundColor: const Color(0xffFCD36B),
+                backgroundColor: YammiColors.goldenYellowColor,
                 child: const Icon(Icons.arrow_upward),
               ),
             ),
@@ -97,8 +99,8 @@ class _LandingPageState extends State<LandingPage> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 3),
-                color: const Color(0xff66FFC9),
+                border: Border.all(color: YammiColors.blackColor, width: 3),
+                color: YammiColors.mintGreenColor,
               ),
               child: MaxWidthBox(
                 maxWidth: 1200,
@@ -109,9 +111,8 @@ class _LandingPageState extends State<LandingPage> {
                   child: Column(
                     children: [
                       YammiNavSection(
-                        onSectionSelected: (section) {
-                          scrollToSection(sectionKeys[section]!);
-                        },
+                        onSectionSelected: (section) =>
+                            scrollToSection(sectionKeys[section]!),
                       ),
                       YammiHeroSection(),
                       SizedBox(height: 16),
@@ -127,70 +128,6 @@ class _LandingPageState extends State<LandingPage> {
           YammiTestimonialSection(key: reviewsKey),
           YammiFooterSection(),
         ],
-      ),
-    );
-  }
-}
-
-class YammiDrawerMenu extends StatefulWidget {
-  const YammiDrawerMenu({super.key, required this.onSectionSelected});
-
-  final void Function(NavSectionType) onSectionSelected;
-
-  @override
-  State<YammiDrawerMenu> createState() => _YammiDrawerMenuState();
-}
-
-class _YammiDrawerMenuState extends State<YammiDrawerMenu> {
-  NavSectionType? _hoveredSection;
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      shape: RoundedRectangleBorder(),
-      child: Container(
-        color: const Color(0xffFCD36B),
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(color: Color(0xffFCD36B)),
-              child: Row(
-                children: const [
-                  Icon(Icons.abc, size: 54),
-                  SizedBox(width: 8),
-                  Text(
-                    'Yammi',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            ...NavSectionType.values.map((section) {
-              final isHovered = _hoveredSection == section;
-              return ListTile(
-                title: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  onEnter: (_) => setState(() => _hoveredSection = section),
-                  onExit: (_) => setState(() => _hoveredSection = null),
-                  child: Text(
-                    section.label,
-                    style: TextStyle(
-                      decorationThickness: 2,
-                      decoration: isHovered
-                          ? TextDecoration.underline
-                          : TextDecoration.none,
-                      fontWeight: isHovered
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                    ),
-                  ),
-                ),
-                onTap: () => widget.onSectionSelected(section),
-              );
-            }),
-          ],
-        ),
       ),
     );
   }

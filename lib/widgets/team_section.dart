@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:yammi_yammi/local_data/team_members.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 import 'package:yammi_yammi/widgets/yammi_menu.dart';
 
@@ -21,7 +22,7 @@ class YammiTeamSection extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: raisedBorderDecoration(
-          backgroundColor: const Color(0xffFF72B4),
+          backgroundColor: YammiColors.hotPinkColor,
           borderRadius: 0,
         ),
         child: MaxWidthBox(
@@ -48,7 +49,7 @@ class YammiTeamSection extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: raisedBorderDecoration(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: teamMembers[index].bgColor,
                         ),
                         child: Container(
                           decoration: BoxDecoration(
@@ -78,11 +79,11 @@ class YammiTeamSection extends StatelessWidget {
                                     ),
                                     border: Border(
                                       top: BorderSide(
-                                        color: Colors.black,
+                                        color: YammiColors.blackColor,
                                         width: 2,
                                       ),
                                     ),
-                                    color: Colors.white,
+                                    color: YammiColors.whiteColor,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
@@ -116,7 +117,7 @@ class YammiTeamSection extends StatelessWidget {
                     height: 280,
                     width: double.infinity,
                     decoration: raisedBorderDecoration(
-                      backgroundColor: const Color(0xffCAFE89),
+                      backgroundColor: YammiColors.limeYellowColor,
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),

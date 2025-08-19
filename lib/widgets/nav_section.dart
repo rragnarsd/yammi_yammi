@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 import 'package:yammi_yammi/utils/nav_section_types.dart';
 
@@ -25,23 +26,15 @@ class _YammiNavSectionState extends State<YammiNavSection> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         decoration: raisedBorderDecoration(
-          backgroundColor: const Color(0xffFCD36B),
+          backgroundColor: YammiColors.goldenYellowColor,
         ),
         child: isTabletOrSmaller
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    children: const [
-                      Icon(Icons.abc, size: 54),
-                      SizedBox(width: 8),
-                      Text(
-                        'Yammi',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    children: [
+                      Image.asset('assets/images/logo.png', height: 54),
                     ],
                   ),
                   Builder(
@@ -55,19 +48,7 @@ class _YammiNavSectionState extends State<YammiNavSection> {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: const [
-                      Icon(Icons.abc, size: 54),
-                      SizedBox(width: 8),
-                      Text(
-                        'Yammi',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                  Image.asset('assets/images/logo.png', height: 54),
                   Row(
                     children: NavSectionType.values.map((section) {
                       final isHovered = _hoveredSection == section;

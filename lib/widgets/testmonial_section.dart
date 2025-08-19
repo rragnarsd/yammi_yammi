@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:yammi_yammi/local_data/testimonials.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiTestimonialSection extends StatelessWidget {
@@ -17,7 +18,7 @@ class YammiTestimonialSection extends StatelessWidget {
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
-        color: Colors.white,
+        color: YammiColors.whiteColor,
         child: MaxWidthBox(
           maxWidth: 1200,
           child: Padding(
@@ -32,40 +33,42 @@ class YammiTestimonialSection extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 32),
-                isTabletOrSmaller
-                    ? Column(
-                        children: testimonials
-                            .map(
-                              (testimonial) => Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: TestimonialCard(
-                                  data: testimonial,
-                                  isInRow: false,
-                                ),
+
+                ResponsiveRowColumn(
+                  columnMainAxisSize: MainAxisSize.max,
+                  rowMainAxisSize: MainAxisSize.max,
+                  layout:
+                      ResponsiveBreakpoints.of(context).isMobile ||
+                          ResponsiveBreakpoints.of(context).isTablet
+                      ? ResponsiveRowColumnType.COLUMN
+                      : ResponsiveRowColumnType.ROW,
+                  children: testimonials.map((testimonial) {
+                    return ResponsiveRowColumnItem(
+                      child:
+                          ResponsiveBreakpoints.of(context).isMobile ||
+                              ResponsiveBreakpoints.of(context).isTablet
+                          ? Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: _TestimonialCard(
+                                data: testimonial,
+                                isDesktop: false,
                               ),
                             )
-                            .toList(),
-                      )
-                    : IntrinsicHeight(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: testimonials
-                              .map(
-                                (testimonial) => Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
-                                    ),
-                                    child: TestimonialCard(
-                                      data: testimonial,
-                                      isInRow: true,
-                                    ),
-                                  ),
+                          //TODO - StaggeredGridView
+                          : Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
                                 ),
-                              )
-                              .toList(),
-                        ),
-                      ),
+                                child: _TestimonialCard(
+                                  data: testimonial,
+                                  isDesktop: true,
+                                ),
+                              ),
+                            ),
+                    );
+                  }).toList(),
+                ),
               ],
             ),
           ),
@@ -75,23 +78,18 @@ class YammiTestimonialSection extends StatelessWidget {
   }
 }
 
-class TestimonialCard extends StatelessWidget {
-  const TestimonialCard({super.key, required this.data, required this.isInRow});
+class _TestimonialCard extends StatelessWidget {
+  const _TestimonialCard({required this.data, required this.isDesktop});
 
   final Testimonial data;
-  final bool isInRow;
-
+  final bool isDesktop;
   @override
   Widget build(BuildContext context) {
-    Widget reviewWidget = isInRow
-        ? Expanded(
-            child: Text(data.review, style: GoogleFonts.lato(fontSize: 14)),
-          )
-        : Text(data.review, style: GoogleFonts.lato(fontSize: 14));
-
     return Container(
       padding: const EdgeInsets.all(16.0),
-      decoration: raisedBorderDecoration(backgroundColor: Colors.white),
+      decoration: raisedBorderDecoration(
+        backgroundColor: YammiColors.whiteColor,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -100,14 +98,22 @@ class TestimonialCard extends StatelessWidget {
             style: GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          reviewWidget,
+          isDesktop
+              ? SizedBox(
+                  height: 100,
+                  child: Text(
+                    data.review,
+                    style: GoogleFonts.lato(fontSize: 14),
+                  ),
+                )
+              : Text(data.review, style: GoogleFonts.lato(fontSize: 14)),
           const SizedBox(height: 16),
           Row(
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(data.avatarUrl),
                 radius: 20,
-                backgroundColor: const Color(0xffFFD074),
+                backgroundColor: YammiColors.peachOrangeColor,
               ),
               const SizedBox(width: 12),
               Column(
@@ -134,7 +140,13 @@ class TestimonialCard extends StatelessWidget {
               5,
               (index) => Icon(
                 index < data.rating ? Icons.star : Icons.star_border,
-                color: Colors.amber,
+                color: YammiColors.goldenYellowColor,
+                shadows: [
+                  Shadow(
+                    color: YammiColors.blackColor,
+                    offset: Offset(0.3, 0.3),
+                  ),
+                ],
                 size: 20,
               ),
             ),

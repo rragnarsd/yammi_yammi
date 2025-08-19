@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiMenu extends StatelessWidget {
@@ -32,11 +33,23 @@ class HoverButton extends StatefulWidget {
     required this.btnText,
     this.onPressed,
     this.hasIcon = false,
+    this.isFullWidth = false,
+    this.isCentered = false,
+    this.backgroundColor = YammiColors.whiteColor,
+    this.textColor = YammiColors.blackColor,
+    this.hoverBackgroundColor,
+    this.hoverTextColor,
   });
 
   final String btnText;
   final VoidCallback? onPressed;
   final bool hasIcon;
+  final bool isFullWidth;
+  final bool isCentered;
+  final Color backgroundColor;
+  final Color textColor;
+  final Color? hoverBackgroundColor;
+  final Color? hoverTextColor;
 
   @override
   State<HoverButton> createState() => _HoverButtonState();
@@ -56,10 +69,12 @@ class _HoverButtonState extends State<HoverButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: raisedBorderDecoration(
-            backgroundColor: _isHovered ? Colors.grey[100]! : Colors.white,
-            borderColor: Colors.black,
+            backgroundColor: _isHovered
+                ? Colors.grey[100]!
+                : YammiColors.whiteColor,
+            borderColor: YammiColors.blackColor,
             shadowOffset: _isHovered ? const Offset(4, 4) : const Offset(2, 2),
           ),
           child: widget.hasIcon
@@ -69,7 +84,7 @@ class _HoverButtonState extends State<HoverButton> {
                     Text(
                       widget.btnText,
                       style: GoogleFonts.lato(
-                        color: Colors.black,
+                        color: YammiColors.blackColor,
                         fontWeight: _isHovered
                             ? FontWeight.bold
                             : FontWeight.normal,
@@ -78,7 +93,6 @@ class _HoverButtonState extends State<HoverButton> {
                     const SizedBox(width: 4),
                     Transform.rotate(
                       angle: 45 * 3.1415926535 / 180,
-
                       child: const Icon(Icons.arrow_upward),
                     ),
                   ],
@@ -86,7 +100,7 @@ class _HoverButtonState extends State<HoverButton> {
               : Text(
                   widget.btnText,
                   style: GoogleFonts.lato(
-                    color: Colors.black,
+                    color: YammiColors.blackColor,
                     fontWeight: _isHovered
                         ? FontWeight.bold
                         : FontWeight.normal,

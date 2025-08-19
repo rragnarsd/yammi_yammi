@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/local_data/menu.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiMenuSection extends StatelessWidget {
@@ -16,34 +20,95 @@ class YammiMenuSection extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16.0),
-      child: GridView.builder(
-        shrinkWrap: true,
+      height: crossAxisCount == 1 ? 1300 : 660,
+      child: AlignedGridView.count(
+        crossAxisCount: crossAxisCount,
+        mainAxisSpacing: 16.0,
+        crossAxisSpacing: 16.0,
+        itemCount: menus.length,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          mainAxisSpacing: 16.0,
-          crossAxisSpacing: 16.0,
-          childAspectRatio: 2.0,
-        ),
-        itemCount: 4,
         itemBuilder: (context, index) {
+          final menu = menus[index];
+
           return Container(
-            decoration: raisedBorderDecoration(backgroundColor: Colors.blue),
+            decoration: BoxDecoration(
+              color: menu.bgColor,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: YammiColors.blackColor, width: 2),
+            ),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        menu.title,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: menu.items.length,
+                        itemBuilder: (context, itemIndex) {
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          menu.items[itemIndex].title,
+                                          style: GoogleFonts.lato(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          "\$${menu.items[itemIndex].price.toStringAsFixed(2)}",
+                                          style: GoogleFonts.lato(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      menu.items[itemIndex].description,
+                                      style: GoogleFonts.lato(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                  ],
+                                ),
+                              ),
+                              if (itemIndex < menu.items.length)
+                                Divider(
+                                  color: YammiColors.blackColor,
+                                  thickness: 1,
+                                  height: 16,
+                                ),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 12),
+                      _SeeMoreButton(index: index),
+                    ],
                   ),
-                  child: Text('Menu Item ${index + 1}'),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text('Menu Item ${index + 1}'),
                 ),
               ],
             ),
@@ -54,84 +119,71 @@ class YammiMenuSection extends StatelessWidget {
   }
 }
 
-class Menu {
-  String title;
-  List<MenuItem> items;
+class _SeeMoreButton extends StatefulWidget {
+  const _SeeMoreButton({required this.index});
 
-  Menu({required this.title, required this.items});
+  final int index;
+
+  @override
+  State<_SeeMoreButton> createState() => _SeeMoreButtonState();
 }
 
-class MenuItem {
-  String title;
-  String description;
-  double price;
+class _SeeMoreButtonState extends State<_SeeMoreButton> {
+  bool _isHovered = false;
 
-  MenuItem({
-    required this.title,
-    required this.description,
-    required this.price,
-  });
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: GestureDetector(
+          onTap: () {},
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: raisedBorderDecoration(
+              backgroundColor: _isHovered
+                  ? Colors.grey[100]!
+                  : YammiColors.blackColor,
+              borderColor: YammiColors.blackColor,
+              borderWidth: 0,
+              shadowOffset: _isHovered
+                  ? const Offset(4, 4)
+                  : const Offset(2, 2),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "See More",
+                  style: GoogleFonts.lato(
+                    color: _isHovered
+                        ? YammiColors.blackColor
+                        : YammiColors.whiteColor,
+                    fontWeight: _isHovered
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Transform.rotate(
+                  angle: 45 * 3.1415926535 / 180,
+                  child: Icon(
+                    Icons.arrow_upward,
+                    color: _isHovered
+                        ? YammiColors.blackColor
+                        : YammiColors.whiteColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
-
-List<Menu> menus = [
-  Menu(
-    title: 'Burgers',
-    items: [
-      MenuItem(
-        title: 'Small daddy',
-        description: 'Classic beef burger with crispy fries',
-        price: 5.0,
-      ),
-      MenuItem(
-        title: 'Big daddy',
-        description: 'Double beef patty burger served with fries',
-        price: 15.0,
-      ),
-    ],
-  ),
-  Menu(
-    title: 'Hot dog',
-    items: [
-      MenuItem(
-        title: 'Yammi',
-        description: 'Traditional hot dog with ketchup and mustard',
-        price: 5.0,
-      ),
-      MenuItem(
-        title: 'Mexican',
-        description: 'Spicy hot dog topped with jalapeños and salsa',
-        price: 7.0,
-      ),
-    ],
-  ),
-  Menu(
-    title: 'Pizza',
-    items: [
-      MenuItem(
-        title: 'Margherita',
-        description: 'Cheesy pizza with fresh tomato and basil',
-        price: 15.0,
-      ),
-      MenuItem(
-        title: 'Pepperoni',
-        description: 'Classic pizza topped with pepperoni slices',
-        price: 14.0,
-      ),
-    ],
-  ),
-  Menu(
-    title: 'Breakfast',
-    items: [
-      MenuItem(
-        title: 'Bacon and eggs',
-        description: 'Crispy bacon served with sunny-side eggs',
-        price: 7.0,
-      ),
-      MenuItem(
-        title: 'Coffee and pancakes',
-        description: 'Stack of pancakes with hot brewed coffee',
-        price: 9.0,
-      ),
-    ],
-  ),
-];

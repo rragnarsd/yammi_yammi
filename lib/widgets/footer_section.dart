@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 
 class YammiFooterSection extends StatelessWidget {
   const YammiFooterSection({super.key});
@@ -16,8 +17,8 @@ class YammiFooterSection extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 2),
-          color: const Color(0xff66FFC9),
+          border: Border.all(color: YammiColors.blackColor, width: 2),
+          color: YammiColors.mintGreenColor,
         ),
         child: MaxWidthBox(
           maxWidth: 1200,
@@ -49,7 +50,7 @@ class _FooterBigScreen extends StatelessWidget {
           children: [Expanded(flex: 2, child: _BrandSection(centered: false))],
         ),
         SizedBox(height: 16),
-        Divider(thickness: 1, color: Colors.black),
+        Divider(thickness: 1, color: YammiColors.blackColor),
         SizedBox(height: 16),
         _FooterLinks(centered: false),
       ],
@@ -67,7 +68,7 @@ class _FooterSmallScreen extends StatelessWidget {
       children: const [
         _BrandSection(centered: true),
         SizedBox(height: 16),
-        Divider(thickness: 1, color: Colors.black),
+        Divider(thickness: 1, color: YammiColors.blackColor),
         SizedBox(height: 16),
         _FooterLinks(centered: true),
       ],
@@ -87,11 +88,11 @@ class _BrandSection extends StatelessWidget {
           ? CrossAxisAlignment.center
           : CrossAxisAlignment.start,
       children: [
-        const CircleAvatar(),
-        const SizedBox(height: 16),
+        Image.asset('assets/images/logo.png', height: 64),
+        const SizedBox(height: 6),
         Text(
           "We make you feel good\nand tasty every day",
-          style: GoogleFonts.lato(),
+          style: GoogleFonts.lato(fontWeight: FontWeight.w600),
           textAlign: centered ? TextAlign.center : TextAlign.start,
         ),
         const SizedBox(height: 20),
@@ -110,10 +111,10 @@ class _IconRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1),
+        border: Border.all(color: YammiColors.blackColor, width: 1),
         shape: BoxShape.circle,
       ),
-      child: Icon(icon, size: 18, color: Colors.black),
+      child: Icon(icon, size: 18, color: YammiColors.blackColor),
     );
   }
 
@@ -154,7 +155,7 @@ class _FooterLinks extends StatelessWidget {
             : MainAxisAlignment.start,
         children: [
           Text("Privacy Policy", style: GoogleFonts.lato()),
-          VerticalDivider(color: Colors.black, thickness: 0.5),
+          VerticalDivider(color: YammiColors.blackColor, thickness: 0.5),
           Text("License", style: GoogleFonts.lato()),
         ],
       ),
