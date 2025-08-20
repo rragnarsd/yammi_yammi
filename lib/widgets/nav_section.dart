@@ -34,7 +34,7 @@ class _YammiNavSectionState extends State<YammiNavSection> {
                 children: [
                   Row(
                     children: [
-                      Image.asset('assets/images/logo.png', height: 54),
+                      Image.asset('assets/images/logo/logo.png', height: 54),
                     ],
                   ),
                   Builder(
@@ -48,7 +48,7 @@ class _YammiNavSectionState extends State<YammiNavSection> {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset('assets/images/logo.png', height: 54),
+                  Image.asset('assets/images/logo/logo.png', height: 54),
                   Row(
                     children: NavSectionType.values.map((section) {
                       final isHovered = _hoveredSection == section;

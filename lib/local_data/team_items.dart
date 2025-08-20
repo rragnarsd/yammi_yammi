@@ -15,23 +15,23 @@ class TeamMembers {
 List<TeamMembers> teamMembers = [
   TeamMembers(
     name: 'Kate',
-    imgUrl: 'assets/images/1.png',
+    imgUrl: 'assets/images/team/1.png',
     bgColor: const Color(0xff96C4E3),
   ),
 
   TeamMembers(
     name: 'James',
-    imgUrl: 'assets/images/3.png',
+    imgUrl: 'assets/images/team/2.png',
     bgColor: const Color(0xffCAFE89),
   ),
   TeamMembers(
     name: 'Sophia',
-    imgUrl: 'assets/images/2.png',
+    imgUrl: 'assets/images/team/3.png',
     bgColor: const Color(0xffFFD074),
   ),
   TeamMembers(
     name: 'Ryan',
-    imgUrl: 'assets/images/4.png',
+    imgUrl: 'assets/images/team/4.png',
     bgColor: const Color(0xff66FFC9),
   ),
 ];

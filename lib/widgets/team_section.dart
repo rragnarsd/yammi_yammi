@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:yammi_yammi/local_data/team_members.dart';
+import 'package:yammi_yammi/local_data/team_items.dart';
 import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 import 'package:yammi_yammi/widgets/yammi_menu.dart';
@@ -153,7 +153,7 @@ class YammiTeamSection extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 16),
                                 child: Image.asset(
-                                  'assets/images/food1.png',
+                                  'assets/images/other/food1.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),

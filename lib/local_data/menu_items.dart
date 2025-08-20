@@ -30,7 +30,7 @@ List<Menu> menus = [
   Menu(
     title: 'Burgers',
     bgColor: Colors.white,
-    imgUrl: 'assets/images/burgerman.png',
+    imgUrl: 'assets/images/other/burgerman.png',
     items: [
       MenuItem(
         title: 'Small daddy',
@@ -47,7 +47,7 @@ List<Menu> menus = [
   Menu(
     title: 'Hot dog',
     bgColor: Color(0xffCAFE89),
-    imgUrl: 'assets/images/hotdogman.png',
+    imgUrl: 'assets/images/other/hotdogman.png',
     items: [
       MenuItem(
         title: 'Yammi',
@@ -64,7 +64,7 @@ List<Menu> menus = [
   Menu(
     title: 'Pizza',
     bgColor: Color(0xffCAFE89),
-    imgUrl: 'assets/images/pizzaman.png',
+    imgUrl: 'assets/images/other/pizzaman.png',
     items: [
       MenuItem(
         title: 'Margherita',
@@ -81,7 +81,7 @@ List<Menu> menus = [
   Menu(
     title: 'Breakfast',
     bgColor: Colors.white,
-    imgUrl: 'assets/images/baconeggman.png',
+    imgUrl: 'assets/images/other/baconeggman.png',
     items: [
       MenuItem(
         title: 'Bacon and eggs',

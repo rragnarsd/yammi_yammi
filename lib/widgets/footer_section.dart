@@ -83,7 +83,7 @@ class _BrandSection extends StatelessWidget {
           ? CrossAxisAlignment.center
           : CrossAxisAlignment.start,
       children: [
-        Image.asset('assets/images/logo.png', height: 64),
+        Image.asset('assets/images/logo/logo.png', height: 64),
         const SizedBox(height: 6),
         Text(
           "We make you feel good\nand tasty every day",

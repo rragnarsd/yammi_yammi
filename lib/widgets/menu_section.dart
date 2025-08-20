@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:yammi_yammi/local_data/menu.dart';
+import 'package:yammi_yammi/local_data/menu_items.dart';
 import 'package:yammi_yammi/utils/app_colors.dart';
 import 'package:yammi_yammi/utils/app_styles.dart';
 
@@ -16,12 +16,12 @@ class YammiMenuSection extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(16.0),
-      height: crossAxisCount == 1 ? 1300 : 660,
       child: AlignedGridView.count(
         crossAxisCount: crossAxisCount,
         mainAxisSpacing: 16.0,
         crossAxisSpacing: 16.0,
         itemCount: menus.length,
+        shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           final menu = menus[index];

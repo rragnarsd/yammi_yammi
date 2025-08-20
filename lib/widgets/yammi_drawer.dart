@@ -25,7 +25,7 @@ class _YammiDrawerMenuState extends State<YammiDrawerMenu> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(color: YammiColors.goldenYellowColor),
-              child: Image.asset('assets/images/logo.png'),
+              child: Image.asset('assets/images/logo/logo.png'),
             ),
             ...NavSectionType.values.map((section) {
               final isHovered = _hoveredSection == section;

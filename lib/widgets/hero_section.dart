@@ -94,6 +94,7 @@ class HeroLeftSection extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                //TODO - Change the UI for mobile - column instead of row
                 child: Row(
                   children: [
                     Expanded(
@@ -119,7 +120,7 @@ class HeroLeftSection extends StatelessWidget {
                     ),
                     Expanded(
                       child: Image.asset(
-                        'assets/images/food3.png',
+                        'assets/images/other/food3.png',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -156,7 +157,9 @@ class HeroLeftSection extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: Image.asset('assets/images/coffeeman.png'),
+                              child: Image.asset(
+                                'assets/images/other/coffeeman.png',
+                              ),
                             ),
                           ],
                         ),
@@ -209,7 +212,9 @@ class HeroLeftSection extends StatelessWidget {
                               bottom: -160,
                               left: 0,
                               right: 0,
-                              child: Image.asset('assets/images/hand.png'),
+                              child: Image.asset(
+                                'assets/images/other/hand.png',
+                              ),
                             ),
                           ],
                         ),
