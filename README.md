@@ -1,16 +1,27 @@
-# yammi_yammi
+# Yammi Yammi
 
-A new Flutter project.
+- The design is inspired by **Aleksey Kostiuk**
+- https://dribbble.com/shots/23689814-Yammi-Yammi-design-site-for-cafe
 
-## Getting Started
+##  :art: Design
+- Neobrutalism
+- The page is fully responsive
+- Font Family: **LexendMega**
+- Images are from:
+  - **www.canva.com**
+- Color palette:
+<img width="1315" height="122" alt="Screenshot 2025-08-20 at 12 10 54" src="https://github.com/user-attachments/assets/df55e1a4-5555-4f00-9919-f48c7b14c881" />
 
-This project is a starting point for a Flutter application.
+## :package: Packages
+- GoogleFonts - https://pub.dev/packages/google_fonts
+- ResponsiveFramework - https://pub.dev/packages/responsive_framework
+- FlutterStaggeredGridView - https://pub.dev/packages/flutter_staggered_grid_view
 
-A few resources to get you started if this is your first Flutter project:
+## :link: Link to Page
+- https://rragnarsd.github.io/yammi_yammi/
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## :camera: Screenshots
+<img width="2160" height="2160" alt="Brown and Cream Soft Book Cover Mockup Instagram Post" src="https://github.com/user-attachments/assets/96ca56ae-2496-414f-b549-9668d5ae44b0" />
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
