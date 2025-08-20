@@ -10,10 +10,6 @@ class YammiTestimonialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTabletOrSmaller = ResponsiveBreakpoints.of(
-      context,
-    ).smallerOrEqualTo(TABLET);
-
     return SliverToBoxAdapter(
       child: Container(
         width: double.infinity,
@@ -22,9 +18,7 @@ class YammiTestimonialSection extends StatelessWidget {
         child: MaxWidthBox(
           maxWidth: 1200,
           child: Padding(
-            padding: isTabletOrSmaller
-                ? const EdgeInsets.all(8.0)
-                : const EdgeInsets.all(32.0),
+            padding: getResponsivePadding(context),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -33,7 +27,6 @@ class YammiTestimonialSection extends StatelessWidget {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 32),
-
                 ResponsiveRowColumn(
                   columnMainAxisSize: MainAxisSize.max,
                   rowMainAxisSize: MainAxisSize.max,
@@ -54,7 +47,6 @@ class YammiTestimonialSection extends StatelessWidget {
                                 isDesktop: false,
                               ),
                             )
-                          //TODO - StaggeredGridView
                           : Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -83,6 +75,7 @@ class _TestimonialCard extends StatelessWidget {
 
   final Testimonial data;
   final bool isDesktop;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -100,7 +93,7 @@ class _TestimonialCard extends StatelessWidget {
           const SizedBox(height: 8),
           isDesktop
               ? SizedBox(
-                  height: 100,
+                  height: ResponsiveBreakpoints.of(context).screenHeight * 0.05,
                   child: Text(
                     data.review,
                     style: GoogleFonts.lato(fontSize: 14),

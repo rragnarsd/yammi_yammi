@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 BoxDecoration raisedBorderDecoration({
   Color backgroundColor = const Color(0xffCAFE89),
@@ -20,4 +21,12 @@ BoxDecoration raisedBorderDecoration({
       ),
     ],
   );
+}
+
+EdgeInsets getResponsivePadding(BuildContext context) {
+  if (ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)) {
+    return const EdgeInsets.all(4.0);
+  } else {
+    return const EdgeInsets.all(32.0);
+  }
 }

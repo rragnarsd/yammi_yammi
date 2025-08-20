@@ -12,11 +12,7 @@ class YammiMenuSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount =
-        ResponsiveBreakpoints.of(context).between(MOBILE, TABLET)
-        ? 1
-        : ResponsiveBreakpoints.of(context).isDesktop
-        ? 2
-        : 2;
+        ResponsiveBreakpoints.of(context).between(MOBILE, TABLET) ? 1 : 2;
 
     return Container(
       padding: const EdgeInsets.all(16.0),

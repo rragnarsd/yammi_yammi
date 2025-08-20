@@ -11,11 +11,10 @@ class YammiTeamSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final breakpoints = ResponsiveBreakpoints.of(context);
-
-    final crossAxisCount = breakpoints.between(MOBILE, TABLET)
-        ? 2
-        : breakpoints.smallerThan(MOBILE)
+    final crossAxisCount = breakpoints.isMobile
         ? 1
+        : breakpoints.isTablet
+        ? 2
         : 4;
 
     return SliverToBoxAdapter(
@@ -28,9 +27,7 @@ class YammiTeamSection extends StatelessWidget {
         child: MaxWidthBox(
           maxWidth: 1200,
           child: Padding(
-            padding: ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
-                ? const EdgeInsets.all(4)
-                : const EdgeInsets.all(32.0),
+            padding: getResponsivePadding(context),
             child: Column(
               children: [
                 YammiMenu(title: 'Our Team', btnText: 'About Us'),
@@ -121,72 +118,48 @@ class YammiTeamSection extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: breakpoints.between(MOBILE, TABLET)
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  flex: 2,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'We are a team of passionate people who love to cook and serve delicious food.',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      SizedBox(height: 16),
-                                      HoverButton(
-                                        btnText: 'Get in Touch',
-                                        onPressed: () {},
-                                        hasIcon: true,
-                                      ),
-                                    ],
+                      child: ResponsiveRowColumn(
+                        layout: breakpoints.isMobile || breakpoints.isTablet
+                            ? ResponsiveRowColumnType.COLUMN
+                            : ResponsiveRowColumnType.ROW,
+                        children: [
+                          ResponsiveRowColumnItem(
+                            child: Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'We are a team of passionate people who love to cook and serve delicious food.',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
-                            )
-                          : Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  flex: 2,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'We are a team of passionate people who love to cook and serve delicious food.',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      SizedBox(height: 16),
-                                      HoverButton(
-                                        btnText: 'Get in Touch',
-                                        onPressed: () {},
-                                        hasIcon: true,
-                                      ),
-                                    ],
+                                  SizedBox(height: 16),
+                                  HoverButton(
+                                    btnText: 'Get in Touch',
+                                    onPressed: () {},
+                                    hasIcon: true,
                                   ),
-                                ),
-                                SizedBox(width: 16),
-                                Flexible(
-                                  child: Image.asset(
-                                    'assets/images/food1.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
+                          ),
+                          if (!breakpoints.isMobile && !breakpoints.isTablet)
+                            ResponsiveRowColumnItem(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16),
+                                child: Image.asset(
+                                  'assets/images/food1.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

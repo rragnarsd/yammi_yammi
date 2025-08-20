@@ -15,17 +15,75 @@ class YammiHeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final breakpoints = ResponsiveBreakpoints.of(context);
     final isColumnLayout = breakpoints.between(MOBILE, TABLET);
-    final fullWidth = MediaQuery.sizeOf(context).width;
 
-    final leftSection = SizedBox(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: isColumnLayout
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16.0,
+              children: [
+                HeroLeftSection(isColumnLayout: true),
+                _BannerSection(isColumnLayout: true),
+              ],
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16.0,
+              children: [
+                HeroLeftSection(isColumnLayout: false),
+                const Expanded(child: _BannerSection(isColumnLayout: false)),
+              ],
+            ),
+    );
+  }
+}
+
+class _BannerSection extends StatelessWidget {
+  const _BannerSection({required this.isColumnLayout});
+
+  final bool isColumnLayout;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOutCubic,
+      height: _resolveHeight(context),
+      width: isColumnLayout ? double.infinity : null,
+      decoration: raisedBorderDecoration(
+        backgroundColor: YammiColors.limeYellowColor,
+      ),
+      child: const _BannerCarousel(),
+    );
+  }
+
+  double _resolveHeight(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    return screenWidth >= 801 ? 480 : 230;
+  }
+}
+
+class HeroLeftSection extends StatelessWidget {
+  const HeroLeftSection({super.key, required this.isColumnLayout});
+
+  final bool isColumnLayout;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+
+    return SizedBox(
       height: 480,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
             flex: 3,
             child: Container(
-              width: isColumnLayout ? double.infinity : fullWidth / 2,
+              width: isColumnLayout ? double.infinity : width / 2,
               decoration: raisedBorderDecoration(
                 backgroundColor: YammiColors.hotPinkColor,
               ),
@@ -69,7 +127,7 @@ class YammiHeroSection extends StatelessWidget {
           Expanded(
             flex: 2,
             child: SizedBox(
-              width: isColumnLayout ? double.infinity : fullWidth / 2,
+              width: isColumnLayout ? double.infinity : width / 2,
               child: Row(
                 children: [
                   Expanded(
@@ -160,35 +218,6 @@ class YammiHeroSection extends StatelessWidget {
         ],
       ),
     );
-
-    final bannerSection = Container(
-      height: MediaQuery.sizeOf(context).width >= 801 ? 480 : 230,
-      width: isColumnLayout ? double.infinity : null,
-      decoration: raisedBorderDecoration(
-        backgroundColor: YammiColors.limeYellowColor,
-      ),
-      child: _BannerCarousel(),
-    );
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: isColumnLayout
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                leftSection,
-                const SizedBox(height: 16),
-                bannerSection,
-              ],
-            )
-          : Row(
-              children: [
-                leftSection,
-                const SizedBox(width: 16),
-                Expanded(child: bannerSection),
-              ],
-            ),
-    );
   }
 }
 
@@ -238,7 +267,7 @@ class _BannerCarouselState extends State<_BannerCarousel> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MediaQuery.sizeOf(context).width >= 801
+                      ResponsiveBreakpoints.of(context).screenWidth >= 801
                           ? Center(child: Image.asset(item.image, height: 162))
                           : SizedBox.shrink(),
                       Container(

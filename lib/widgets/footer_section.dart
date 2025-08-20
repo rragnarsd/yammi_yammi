@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:yammi_yammi/utils/app_colors.dart';
+import 'package:yammi_yammi/utils/app_styles.dart';
 
 class YammiFooterSection extends StatelessWidget {
   const YammiFooterSection({super.key});
@@ -23,11 +24,7 @@ class YammiFooterSection extends StatelessWidget {
         child: MaxWidthBox(
           maxWidth: 1200,
           child: Padding(
-            padding: isTabletOrSmaller
-                ? ResponsiveBreakpoints.of(context).smallerOrEqualTo(TABLET)
-                      ? const EdgeInsets.all(4.0)
-                      : const EdgeInsets.all(32.0)
-                : const EdgeInsets.all(32.0),
+            padding: getResponsivePadding(context),
             child: isTabletOrSmaller
                 ? _FooterSmallScreen()
                 : _FooterBigScreen(),
@@ -45,13 +42,12 @@ class _FooterBigScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      spacing: 16,
       children: const [
         Row(
           children: [Expanded(flex: 2, child: _BrandSection(centered: false))],
         ),
-        SizedBox(height: 16),
         Divider(thickness: 1, color: YammiColors.blackColor),
-        SizedBox(height: 16),
         _FooterLinks(centered: false),
       ],
     );
@@ -65,11 +61,10 @@ class _FooterSmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 16,
       children: const [
         _BrandSection(centered: true),
-        SizedBox(height: 16),
         Divider(thickness: 1, color: YammiColors.blackColor),
-        SizedBox(height: 16),
         _FooterLinks(centered: true),
       ],
     );
@@ -107,7 +102,29 @@ class _IconRow extends StatelessWidget {
 
   final bool centered;
 
-  Widget _circleIcon(IconData icon) {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 8,
+      mainAxisAlignment: centered
+          ? MainAxisAlignment.center
+          : MainAxisAlignment.start,
+      children: [
+        SocialIcons(icon: Icons.discord),
+        SocialIcons(icon: Icons.alternate_email),
+        SocialIcons(icon: Icons.alternate_email),
+      ],
+    );
+  }
+}
+
+class SocialIcons extends StatelessWidget {
+  const SocialIcons({super.key, required this.icon});
+
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -115,22 +132,6 @@ class _IconRow extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: Icon(icon, size: 18, color: YammiColors.blackColor),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: centered
-          ? MainAxisAlignment.center
-          : MainAxisAlignment.start,
-      children: [
-        _circleIcon(Icons.discord),
-        const SizedBox(width: 10),
-        _circleIcon(Icons.alternate_email),
-        const SizedBox(width: 10),
-        _circleIcon(Icons.play_circle),
-      ],
     );
   }
 }
