@@ -61,7 +61,12 @@ class _BannerSection extends StatelessWidget {
 
   double _resolveHeight(BuildContext context) {
     final screenWidth = MediaQuery.sizeOf(context).width;
-    return screenWidth >= 801 ? 480 : 230;
+    final breakpoint = ResponsiveBreakpoints.of(context);
+    return screenWidth >= 801
+        ? 480
+        : breakpoint.isTablet
+        ? 230
+        : 300;
   }
 }
 

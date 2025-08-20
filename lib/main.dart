@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:yammi_yammi/landing_page.dart';
+import 'package:yammi_yammi/utils/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Yammi Yammi',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: YammiColors.goldenYellowColor,
+        ),
         textTheme: GoogleFonts.lexendMegaTextTheme(),
       ),
       builder: (context, child) => ResponsiveBreakpoints.builder(
