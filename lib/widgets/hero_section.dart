@@ -60,7 +60,7 @@ class _BannerSection extends StatelessWidget {
   }
 
   double _resolveHeight(BuildContext context) {
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenWidth = ResponsiveBreakpoints.of(context).screenWidth;
     final breakpoint = ResponsiveBreakpoints.of(context);
     return screenWidth >= 801
         ? 480
@@ -94,7 +94,6 @@ class HeroLeftSection extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                //TODO - Change the UI for mobile - column instead of row
                 child: Row(
                   children: [
                     Expanded(
@@ -118,12 +117,14 @@ class HeroLeftSection extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: Image.asset(
-                        'assets/images/other/food3.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    ResponsiveBreakpoints.of(context).isMobile
+                        ? SizedBox.shrink()
+                        : Expanded(
+                            child: Image.asset(
+                              'assets/images/other/food3.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ],
                 ),
               ),

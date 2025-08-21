@@ -1,4 +1,9 @@
-# Yammi Yammi
+# Yammi Yammi - Where cravings meet their match.
+
+## 👉 About Yammi Yammi
+No fancy fluff, just juicy 🍔, crispy 🍟, and comfort food that 👏 . Pull up, dig in, and let’s keep it messy, tasty, and fun.
+
+Hungry? Yeah, we got you. 😋
 
 - The design is inspired by **Aleksey Kostiuk**
 - https://dribbble.com/shots/23689814-Yammi-Yammi-design-site-for-cafe
